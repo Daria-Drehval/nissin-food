@@ -1,0 +1,44 @@
+<section data-section-id="{{ section.id }}" data-section-type="related-articles">
+  <link rel="stylesheet" href="{{- 'related-articles.css' | asset_url -}}">
+  <script src="{{- 'related-articles.js' | asset_url -}}" defer></script>
+
+  <div class="relatedArticles__wrapper container">
+    <h2 class="relatedArticles__title">related articles</h2>
+    <div class="relatedArticles__content">
+      {%- for article in blog.articles limit: 2 -%}
+        <div class="relatedArticles__item">
+          <div class="relatedArticles__itemImage">
+            {%- render 'lazy-img',
+              class: 'relatedArticles__image',
+              alt: article.title,
+              product_img_url: '580x523'
+            -%}
+            <span class="relatedArticles__itemImageTag">
+              {%- render 'icons', icon: 'featured-star' -%}
+              Featured
+            </span>
+          </div>
+          <div class="relatedArticles__itemContent">
+            <span class="relatedArticles__itemTag">{{- article.tag | limit: 1 -}}</span>
+            <a href="{{ article.url }}" class="relatedArticles__itemTitle h5">{{- article.title -}}</a>
+            <p class="relatedArticles__itemDate">{{- article.published_at -}}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+
+{
+  "name": "Related articles",
+  "class": "relatedArticles",
+  "presets": [
+    {
+      "name": "Related articles"
+    }
+  ]
+}
+
+{% endschema %}

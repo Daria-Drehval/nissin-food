@@ -1,0 +1,123 @@
+@import '../variables.scss';
+@import '../typography.scss';
+
+.heroSlider {
+  display: flex;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: rem(115);
+  }
+
+  .slick-arrow {
+    position: absolute;
+    right: 4%;
+    z-index: 1;
+    background: $black;
+    min-width: rem(64);
+    height: rem(64);
+
+    @media screen and (max-width: 768px) {
+      min-width: rem(54);
+      height: rem(54);
+    }
+  }
+
+  .prev-arrow {
+    bottom: 28.5%;
+
+    @media screen and (max-width: 768px) {
+      right: unset;
+      left: 35%;
+      bottom: -17%;
+    }
+  }
+
+  .next-arrow {
+    bottom: 13.5%;
+
+    @media screen and (max-width: 768px) {
+      right: 34%;
+      bottom: -17%;
+    }
+  }
+
+  .heroSlide__wrapper {
+    .heroSlide {
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      -o-transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+      position: relative;
+      transform: translate3d(0, 0, 0);
+
+      .heroSlide__content {
+        bottom: 0;
+        left: 0;
+        margin: 0 auto;
+        padding: rem(65) rem(75);
+        position: absolute;
+        text-align: left;
+
+        @media screen and (max-width: 768px) {
+          padding: rem(39) rem(32);
+        }
+
+        .heroSlide__title {
+          color: $white;
+          margin-bottom: rem(20);
+          letter-spacing: -0.02rem;
+
+          @media screen and (max-width: 768px) {
+            margin-bottom: rem(15);
+          }
+        }
+
+        .heroSlide__text {
+          margin-bottom: rem(20);
+
+          @media screen and (max-width: 768px) {
+            margin-bottom: rem(15);
+          }
+        }
+      }
+
+      .heroSlide__images {
+        &.heroSlide__images--desktopOnly {
+          .heroSlide__image {
+            &.heroSlide__image--desktop {
+              @media screen and (max-width: 768px) {
+                display: block;
+              }
+            }
+          }
+        }
+
+        .heroSlide__image {
+          display: block;
+          height: rem(490);
+          object-fit: cover;
+          overflow: hidden;
+          width: 100%;
+
+          &.heroSlide__image--desktop {
+            @media screen and (max-width: 768px) {
+              display: none;
+            }
+          }
+
+          &.heroSlide__image--mobile {
+            @media screen and (min-width: 769px) {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .heroSlide__button {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}

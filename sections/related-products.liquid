@@ -1,0 +1,77 @@
+{%- assign ss = section.settings -%}
+
+{%- if product != blank  -%}
+  <link rel="stylesheet" href="{{- 'product-card.css' | asset_url -}}" async>
+  <link rel="stylesheet" href="{{- 'related-products.css' | asset_url -}}" async>
+  <script src="{{ 'related-products.js' | asset_url }}" defer="defer"></script>
+  <div class="relatedProducts__wrapper container" data-section-type="related-products" data-id="{{- section.id -}}">
+    {% if ss.title != blank %}
+      <div class="relatedProducts__header">
+        <div class="relatedProducts__headerTitle h1">
+          {{- ss.title -}}
+        </div>
+      </div>
+      <related-products class="related-products"  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ ss.products_to_show }}&intent={{ ss.method }}">
+        <div class="relatedProducts__content{% if recommendations.products_count > 1 %} relatedProducts__content--slider{% endif %}">
+          {% for recommendation in recommendations.products %}
+            <div class="relatedProducts__contentItem">
+              {%- render 'product-card',
+                product: recommendation,
+                section_id: section.id
+              %}
+            </div>
+          {% endfor %}
+        </div>
+      </related-products>
+    {% endif %}
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Related products",
+    "class": "relatedProducts",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Title settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "You Might Also Like"
+      },
+      {
+        "type": "range",
+        "id": "products_to_show",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "Products count",
+        "default": 1
+      },
+      {
+        "type": "select",
+        "id": "method",
+        "label": "Recommendation intents",
+        "options": [
+          {
+          "value": "complementary",
+          "label": "Complementary"
+          },
+          {
+            "value": "related",
+            "label": "Related"
+          }
+        ],
+        "default": "complementary"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Related products"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,197 @@
+@import './variables.scss';
+
+.productSection__sizeChart {
+  background: $white;
+  border-radius: 30px;
+  box-shadow: 0px 27px 35px 0px rgba($black, .25);
+  height: rem(591);
+  padding: rem(47);
+  position: absolute;
+  width: rem(861);
+
+  @media screen and (max-width: 1360px) {
+    height: rem(350);
+    padding: rem(30) rem(17);
+    width: rem(640);
+  }
+
+  @media screen and (max-width: 768px) {
+    height: rem(452);
+    padding: rem(50) rem(20);
+    width: rem(335);
+  }
+
+  .productSection__sizeChartHeader {
+    .icon-shirt {
+      @media screen and (max-width: 1360px) {
+        width: rem(50);
+        height: rem(50);
+      }
+    }
+
+    .productSection__sizeChartTitle {
+      margin-top: rem(35);
+
+      @media screen and (max-width: 1360px) {
+        margin-top: rem(15);
+        font-size: rem(25);
+      }
+
+      @media screen and (max-width: 1000px) {
+        margin-top: rem(30);
+      }
+    }
+  }
+
+  .productSection__sizeChartContent {
+    display: flex;
+    flex-direction: column;
+    margin: rem(45) 0;
+
+    @media screen and (max-width: 1360px) {
+      margin: rem(15) 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin: rem(45) 0 rem(20);
+      padding-bottom: rem(20);
+      overflow: scroll;
+      width: 100%;
+
+      &::-webkit-scrollbar {
+        background-color: $grey;
+        border-radius: 52px;
+        height: rem(4);
+        margin-top: rem(20);
+        width: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $red;
+        border-radius: 52px;
+      }
+    }
+
+
+    .productSection__sizeChartContentRow {
+      display: flex;
+      gap: rem(50);
+      border-top: 1px solid rgba($black, 0.55);
+      padding: rem(20) 0;
+      text-transform: capitalize;
+
+      @media screen and (max-width: 1360px) {
+        gap: rem(15);
+        padding: rem(10) 0;
+      }
+
+      @media screen and (max-width: 768px) {
+        border: none;
+        padding: 0;
+
+        &:first-of-type {
+          .productSection__sizeChartRowContent {
+            border: none;
+          }
+        }
+      }
+
+      .productSection__sizeChartRowTitle {
+        font-family: $font-family-button-bold;
+        width: 15%;
+
+        @media screen and (max-width: 1360px) {
+          width: 20%;
+        }
+
+        @media screen and (max-width: 768px) {
+          background: $white;
+          font-size: rem(14);
+          position: fixed;
+          width: rem(100);
+          z-index: 1;
+          padding: rem(10) 0;
+          border-top: 1px solid rgba($black, .55);
+        }
+      }
+
+      .productSection__sizeChartRowContent {
+        display: flex;
+        justify-content: space-between;
+        width: 75%;
+
+        @media screen and (max-width: 768px) {
+          align-items: center;
+          border-top: 1px solid rgba($black,.55);
+          gap: rem(15);
+          left: rem(110);
+          margin-left: rem(-10);
+          min-width: rem(335);
+          padding: rem(10);
+          position: relative;
+          right: 0;
+          width: 110%;
+        }
+
+        .productSection__sizeChartItem {
+          font-family: $font-family-button;
+          color: rgba($black, .5);
+        }
+      }
+
+      &:first-of-type {
+        border-top: none;
+
+        .productSection__sizeChartRowTitle {
+          &:first-child {
+            color: rgba($black, .5);
+            font-weight: $fw-semi-bold;
+
+            @media screen and (max-width: 768px) {
+              border: none;
+            }
+          }
+        }
+
+        .productSection__sizeChartItem {
+          font-family: $font-family-button-bold;
+          color: $black;
+          min-width: rem(41);
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .textBanner__closeIcon {
+    cursor: pointer;
+    height: rem(73);
+    position: absolute;
+    right: rem(-25);
+    top: rem(-25);
+    width: rem(73);
+
+    @media screen and (max-width: 768px) {
+      height: rem(42);
+      right: rem(-15);
+      top: rem(-15);
+      width: rem(42);
+    }
+  }
+}
+
+.sizeChart__overlay--active {
+  align-items: center;
+  background-color: rgba($dark-grey, .9);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  opacity: 1;
+  pointer-events: all;
+  position: fixed;
+  right: 0;
+  top: 0;
+  visibility: visible;
+  z-index: 3;
+}

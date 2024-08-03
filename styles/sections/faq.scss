@@ -1,0 +1,119 @@
+@import '../variables.scss';
+
+.faqSection__wrapper {
+  display: grid;
+  gap: rem(80);
+  grid-template-columns: repeat(2, 1fr);
+  margin: rem(35) auto rem(100);
+  max-width: rem(1235);
+  padding: 0 rem(10);
+
+  @media screen and (max-width: 768px) {
+    gap: rem(25);
+    grid-template-columns: 1fr;
+    margin: rem(35) rem(10);
+    padding: 0;
+  }
+
+  .faqSection__headingContent {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+      align-items: center;
+      text-align: center;
+    }
+
+    .faqSection__heading {
+      @media screen and (max-width: 768px) {
+        font-size: rem(43);
+      }
+    }
+
+    .faqSection__description {
+      font-family: $font-family-button;
+      margin: rem(15) 0;
+      max-width: 75%;
+      text-transform: uppercase;
+    }
+
+    .faqSection__button {
+      margin-top: rem(10);
+
+      @media screen and (max-width: 768px) {
+        min-width: rem(143);
+
+        &.button--red {
+          background-color: $black;
+        }
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .faqSection__content {
+    .faqSection__item {
+      background-color: $dark-grey;
+      border-radius: 52px;
+      cursor: pointer;
+      margin-bottom: rem(10);
+      padding: rem(15) rem(31) rem(14);
+
+      @media screen and (max-width: 768px) {
+        padding: rem(7) rem(28) rem(8);
+      }
+
+      .faqSection__itemHeading {
+        display: flex;
+        flex-direction: column;
+        font-family: $font-family-button;
+        font-size: rem(18);
+        justify-content: center;
+        line-height: rem(20);
+        min-height: rem(40);
+        padding-right: rem(20);
+        position: relative;
+        text-transform: uppercase;
+
+        @media screen and (max-width: 768px) {
+          font-size: rem(16);
+          line-height: rem(18);
+          min-height: rem(54);
+        }
+
+        .arrow__icon {
+          bottom: 0;
+          display: block;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: rotate(270deg);
+          width: rem(15);
+
+          path {
+            fill: $black;
+          }
+        }
+      }
+
+      .faqSection__itemText {
+        font-family: $font-family-button;
+        max-height: 0;
+        opacity: 0;
+        transition: all .3s ease;
+        visibility: hidden;
+
+        &.faqSection__itemText--active {
+          margin: rem(20) 0;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}

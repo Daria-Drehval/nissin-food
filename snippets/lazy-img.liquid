@@ -1,0 +1,57 @@
+{% comment %}
+https://github.com/ApoorvSaxena/lozad.js
+
+{% render 'lazy-img', class: 'className', src: src, alt: 'alt' %}
+
+checking if file is uploaded to shopify files
+parsing from "https://cdn.shopify.com/s/files/1/0286/5938/4460/files/BLU5.png?v=1579101732" to "BLU5.png"
+{% endcomment %}
+
+{%- assign isFile = false -%}
+
+{%- assign tempSrc = src | split: '//cdn.shopify.com/s/files/' -%}
+{% comment %} if image uploaded to shopify files {% endcomment %}
+{%- if tempSrc.size > 1-%}
+  {%- assign isFile = true -%}
+  {% comment %} remove ?v=12312312312 {% endcomment %}
+  {%- assign tempSrc = tempSrc[1] | split: '?'  -%}
+  {%- assign tempSrc = tempSrc[0] | split: '/' -%}
+  {%- assign lastIndex = tempSrc.size | minus: 1 -%}
+  {%- assign tempSrc = tempSrc[lastIndex] -%}
+  {%- assign src = tempSrc -%}
+{%- endif -%}
+
+{%- assign dataSrcSet = "" -%}
+{%- assign resolutions = '375, 768, 1024, 1440, 1920, 2560, 4096' | split: ', ' -%}
+{%- if isFile -%}
+  {%- assign dataSrc = src | file_img_url: '100x' -%}
+{%- else -%}
+  {%- assign dataSrc = src | img_url: '100x' -%}
+{%- endif -%}
+
+{%- if dataSrc contains 'no-image' -%}
+  <img
+    alt="{{ alt }}"
+    class="{{ class }}"
+    src="{{ src }}">
+{%- else -%}
+  {%- for resolution in resolutions -%}
+    {%- unless forloop.first -%}
+      {%- assign dataSrcSet = dataSrcSet | append: ', ' -%}
+    {%- endunless -%}
+    {%- assign currentResolution = resolution | append: 'x' -%}
+    {%- if isFile -%}
+      {%- assign newDataSrcSet = src | file_img_url: currentResolution -%}
+    {%- else -%}
+      {%- assign newDataSrcSet = src | img_url: currentResolution -%}
+    {%- endif -%}
+    {%- assign dataSrcSet = dataSrcSet | append: newDataSrcSet | append: ' ' | append: resolution | append: 'w' -%}
+  {%- endfor -%}
+
+  <img
+    alt="{{ alt }}"
+    class="lozad {{ class }}"
+    data-src="{{ dataSrc }}"
+    data-srcset="{{ dataSrcSet }}"
+    src="{{ dataSrc }}">
+{%- endif -%}

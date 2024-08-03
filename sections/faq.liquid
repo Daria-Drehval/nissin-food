@@ -1,0 +1,103 @@
+{%- if section.blocks.size > 0 -%}
+  <section data-section-id="{{ section.id }}" data-section-type="faq">
+    <link rel="stylesheet" href="{{- 'faq.css' | asset_url -}}">
+    <script src="{{- 'faq.js' | asset_url -}}" defer></script>
+
+    <div class="faqSection__wrapper">
+      <div class="faqSection__headingContent">
+        <div class="faqSection__heading h1" style="color: {{- section.settings.heading_color -}}">{{- section.settings.heading -}}</div>
+        {%- if section.settings.description -%}
+          <p class="faqSection__description" style="color: {{ section.settings.description_color }}">{{- section.settings.description -}}</p>
+        {%- endif -%}
+        {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+          <a class="faqSection__button button button--red" href="{{- section.settings.button_link -}}">{{- section.settings.button_text -}}</a>
+        {%- endif -%}
+      </div>
+      <div class="faqSection__content">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.title != blank and block.settings.text != blank -%}
+          <div class="faqSection__item">
+            <div class="faqSection__itemHeading">
+              {{- block.settings.title -}}
+              {%- render 'icons', icon: 'arrow' -%}
+            </div>
+            <p class="faqSection__itemText">{{- block.settings.text -}}</p>
+          </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "FAQ",
+	"class": "faqSection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+	"blocks": [
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+	],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "content"
+        },
+        {
+          "type": "content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

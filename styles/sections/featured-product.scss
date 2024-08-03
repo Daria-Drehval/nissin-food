@@ -1,0 +1,212 @@
+@import '../variables';
+@import '../typography';
+@import '../slick';
+
+.featuredProduct {
+  margin: rem(42) auto rem(60);
+  position: relative;
+
+  @media screen and (max-width: 768px) {
+    margin: rem(22) rem(10) rem(40);
+  }
+
+  .featuredProduct__heading {
+    text-align: center;
+  }
+
+  .featuredProduct__collections {
+    background-color: $dark-grey;
+    max-width: 788px;
+    margin: rem(29) auto rem(47);
+    border-radius: 52px;
+
+    @media screen and (max-width: 768px) {
+      margin: rem(30) auto rem(28);
+    }
+
+    .slick-list  {
+      max-width: rem(650);
+      margin: 0 auto;
+
+      @media screen and (max-width: 768px) {
+        margin: 0 rem(40);
+      }
+
+      @media screen and (max-width: 480px) {
+        max-width: rem(270);
+      }
+    }
+
+    .slick-track {
+      align-items: center;
+      display: flex;
+      gap: rem(20);
+      min-height: rem(78);
+      overflow: hidden;
+
+      @media screen and (max-width: 768px) {
+        min-height: rem(61);
+        gap: rem(7);
+      }
+
+      @media screen and (max-width: 480px) {
+        gap: rem(4);
+      }
+    }
+
+    .slick-arrow {
+      background: $red;
+      height: rem(40);
+      min-width: rem(40);
+      padding: 0;
+      position: absolute;
+      top: 0;
+      transform: translateY(50%);
+      z-index: 1;
+
+      &:hover {
+        background: $yellow;
+      }
+
+      @media screen and (max-width: 768px) {
+        min-width: rem(31);
+        height: rem(31);
+      }
+    }
+
+    .prev-arrow {
+      left: 4%;
+    }
+
+    .next-arrow {
+      right: 4%;
+    }
+
+    .featuredProduct__collection {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      position: relative;
+
+      svg {
+        @media screen and (max-width: 768px) {
+          scale: 0.9;
+        }
+      }
+
+      &.selected {
+        &::before {
+          background: $yellow;
+          content: '';
+          height: 7px;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: -38%;
+          width: 100%;
+
+          @media screen and (max-width: 768px) {
+            top: -18%;
+          }
+        }
+
+        &::after {
+          background: $yellow;
+          bottom: -38%;
+          content: '';
+          height: 7px;
+          left: 0;
+          position: absolute;
+          right: 0;
+          width: 100%;
+
+          @media screen and (max-width: 768px) {
+            bottom: -18%;
+          }
+        }
+      }
+
+      a::after {
+        display: none;
+      }
+    }
+  }
+
+  .featuredProduct__wrapper {
+    position: relative;
+
+    .featuredProduct__content {
+      opacity: 1;
+      transition: .3s ease;
+      visibility: visible;
+      display: block;
+
+      @media screen and (max-width: 768px) {
+        left: 0;
+        position: relative;
+        right: 0;
+        top: 0;
+      }
+
+      &.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  .featuredProduct__products {
+    width: 100%;
+
+    @media screen and (min-width: 769px) {
+      display: grid;
+      gap: rem(25) rem(14);
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: rem(40);
+    }
+
+    .slick-arrow {
+      position: absolute;
+      z-index: 1;
+      background: $red;
+      min-width: rem(43);
+      height: rem(43);
+
+      @media screen and (max-width: 768px) {
+        bottom: -5%;
+      }
+
+      &:hover {
+        background: $yellow;
+      }
+    }
+
+    .prev-arrow {
+      left: 35%;
+    }
+
+    .next-arrow {
+      right: 34%;
+    }
+  }
+
+  .featuredProduct__buttonAll {
+    margin: rem(45) auto;
+    text-align: center;
+
+    .button {
+      color: $white;
+
+      .arrow__icon {
+        margin-left: rem(10);
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}

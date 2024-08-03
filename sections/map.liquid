@@ -1,0 +1,213 @@
+{%- assign ss = section.settings -%}
+{%- if ss.image != blank -%}
+  <link rel="stylesheet" href="{{- 'map.css' | asset_url -}}">
+  <script src="{{- 'map.js' | asset_url -}}" defer></script>
+  <div class="map__wrapper" style="background-color: {{- ss.background_color -}};">
+    {% comment %} map content {% endcomment %}
+    <div class="map__content">
+      {% comment %} content header, show only if title or description is not empty {% endcomment %}
+      {%- if ss.title != blank or ss.description != blank -%}
+        <div class="map__contentHeader">
+          {%- if ss.title != blank -%}
+            <div class="map__contentHeaderTitle" style="color: {{- ss.title_color -}};">
+              {{- ss.title | newline_to_br -}}
+            </div>
+          {%- endif -%}
+          {%- if ss.description != blank -%}
+            <div class="map__contentHeaderDescription" style="color: {{- ss.description_color -}};">
+              {{- ss.description | newline_to_br -}}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {% comment %} content footer ( buttons row) {% endcomment %}
+      <div class="map__contentFooter">
+        {% comment %} select show after fetch {% endcomment %}
+        <div class="map__contentFooterSelectWrapper custom-select customSelect--red">
+          <select name="mapProduct" id="mapProduct" class="map__contentFooterSelect">
+          </select>
+          <div class="map__contentFooterSelectLoader">
+            <div class="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="map__contentFooterSelectCustom" data-placeholder="{{- 'map.select_placeholder' | t -}}">
+          </div>
+        </div>
+        {% comment %} zip code button {% endcomment %}
+        <a {% if ss.button_zip_link != blank %} href="{{- ss.button_zip_link -}}"{% endif %}  class="map__contentFooterButton map__contentFooterButton--zip">
+          {{- 'map.zip_placeholder' | t -}}
+        </a>
+        {% comment %} search button {% endcomment %}
+        <button class="map__contentFooterButton map__contentFooterButton--search">
+          {%- render 'icons', icon: 'map-search' -%}
+        </button>
+      </div>
+    </div>
+    {% comment %} map main {% endcomment %}
+    <div class="map__main">
+      {% comment %} main image {% endcomment %}
+      {%- render 'lazy-img',
+        class: 'map__mainImage',
+        src: ss.image,
+        alt: section.name
+      -%}
+      {% comment %} map icons only show if they more then 0 {% endcomment %}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in  section.blocks -%}
+          {%- assign bs = block.settings -%}
+          {%- capture imageStyle -%}
+            --top: {{- bs.top_desktop -}}%;
+            --left: {{- bs.left_desktop -}}%;
+            --top-mobile: {{- bs.top_mobile -}}%;
+            --left-mobile: {{- bs.left_mobile -}}%;
+          {%- endcapture -%}
+          {%- if bs.image != blank  -%}
+            <div class="map__mainIconWrapper" style="{{- imageStyle -}}">
+              {%- render 'lazy-img',
+                class: 'map__mainIcon',
+                src: bs.image,
+                alt: bs.image.alt
+              -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Map",
+    "class": "map",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Background settings"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Title settings"
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Title",
+        "default": "Find nearest store",
+        "info": "Use 'Enter' for breack line"
+      },
+      {
+        "type": "color",
+        "id": "title_color",
+        "label": "Title color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Description settings"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "info": "Use 'Enter' for breack line"
+      },
+      {
+        "type": "color",
+        "id": "description_color",
+        "label": "Description color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Buttons settings"
+      },
+      {
+        "type": "url",
+        "id": "button_zip_link",
+        "label": "ZIP button link"
+      },
+      {
+        "type": "url",
+        "id": "button_search_link",
+        "label": "Search button link"
+      },
+      {
+        "type": "header",
+        "content": "Main image settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "icon",
+        "name": "Icon",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "range",
+            "id": "top_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Top position",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "left_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Left position",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Top position (mobile)",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "left_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Left position (mobile)",
+            "default": 0
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Map"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,35 @@
+<style>
+  :root {
+    --container-max-width: 1440px;
+
+    --color-blue: #B4D3FD;
+    --color-bg: #FAFAFA;
+    --color-white: #FFFFFF;
+    --color-border: #E1E1E1;
+
+    --font-family: "Cubano", Helvetica, sans-serif;
+
+    --font-size-body: calc(0.97vw); 
+
+    --transition-duration: 0.3s;
+    --transition-property: all;
+    --transition-timing-function: ease;
+    --transition-default: var(--transition-property) var(--transition-duration) var(--transition-timing-function);
+
+    --border-width: 2px;
+    --border-style: solid;
+    --border-default: var(--border-width) var(--border-style) var(--color-black-20);
+  }
+
+  @media all and (max-width: 768px) {
+    :root {
+      --font-size-body: 16px; /* as in design */
+    }
+  }
+
+  @media all and (min-width: 1440px) {
+    :root {
+      --font-size-body: 16px; /* compluted with the proportion 14px - 1440 18.6(6)px - 1920px */
+    }
+  }
+</style>

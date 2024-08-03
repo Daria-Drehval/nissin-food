@@ -1,0 +1,225 @@
+{%- if section.blocks.size > 0 -%}
+  <section data-section-id="{{ section.id }}" data-section-type="product-detail">
+    <link rel="stylesheet" href="{{ 'product-detail.css' | asset_url }}">
+    <script src="{{ 'product-detail.js' | asset_url }}" defer></script>
+    <link rel="stylesheet" href="{{ 'size-chart.css' | asset_url }}">
+    <script src="{{ 'size-chart.js' | asset_url }}" defer></script>
+
+    <div class="productSection__wrapper">
+      <div class="productSection__slider">
+        <div class="productSection__imagesGallery sticky_gallery">
+          <div class="productSection__galleryNav slider-nav">
+            {%- for image in product.images -%}
+            {%- render 'lazy-img',
+              class: 'productSection__image',
+              src: image,
+              alt: product.title,
+              product_img_url: '48x48'
+            -%}
+          {%- endfor -%}
+          </div>
+        </div>
+        <div class="productSection__images{% if product.images.size > 1 %} productSection__images--slider{% endif %} slider-for">
+          {%- for image in product.images -%}
+            {%- render 'lazy-img',
+              class: 'productSection__image',
+              src: image,
+              alt: product.title
+            -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="productSection__content productSection--js">
+        <div class="productSection__contentWrapper">
+          <div class="productSection__contentHeader">
+            <button class="productSection__contentHeaderButton button" onclick="window.history.back();">
+              {%- render 'icons', icon: 'icon-arrow' -%}
+              {{- 'product.back_button' | t -}}
+            </button>
+            {%- if section.settings.show_share_icons -%}
+              <div class="productSection__contentShare">
+                <p class="productSection__contentShareTitle">
+                  {%- render 'icons', icon: 'star' -%}
+                  {{- 'product.share_title' | t -}}:
+                </p>
+                <div class="productSection__contentShareIcons">
+                  {%- assign share_url = shop.url | append: product.url -%}
+                    <a class="productSection__contentShareIcon productSection__contentShareIcon--facebook" href="https://www.facebook.com/sharer.php?u={{ share_url }}" target="_blank" rel="noopener" aria-label="{{ 'product.social.facebook' | t }}">
+                      {%- render 'icons', icon: "facebook" -%}
+                    </a>
+                    <a class="productSection__contentShareIcon productSection__contentShareIcon--twitter" href="https://twitter.com/share?url={{ share_url }}" target="_blank" rel="noopener" aria-label="{{ 'product.social.twitter' | t }}">
+                      {%- render 'icons', icon: "twitter" -%}
+                    </a>
+                    <a class="productSection__contentShareIcon productSection__contentShareIcon--pinterest" href="https://pinterest.com/pin/create/button/?url={{ share_url }}" target="_blank" rel="noopener" aria-label="{{ 'product.social.pinterest' | t }}">
+                      {%- render 'icons', icon: "pinterest" -%}
+                    </a>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+          {%- for block in section.blocks -%}
+            {%- if block.type == "title" -%}
+              <h4 class="productSection__title">
+                {{- product.title -}}
+              </h4>
+            {%- endif -%}
+            {%- if block.type == "vendor" -%}
+              <p class="productSection__vendor">
+                {{- product.vendor -}}
+              </p>
+            {%- endif -%}
+            {%- if block.type == "form" -%}
+              {%- form 'product', product, class: "productSection__form product", novalidate: 'novalidate'-%}
+                <div class="no-js-hidden" id="price-{{ section.id }}">
+                  {%- for variant in product.variants -%}
+                    <span class="productSection__money h5 productSection__price--js" value="{{- variant.id -}}" {% unless forloop.first %}hidden{% endunless %}>
+                      {{- variant.price | money -}}
+                    </span>
+                  {%- endfor -%}
+                </div>
+                <div class="productSection__info" data-id="{{- product.id -}}" >
+                  {%- unless product.has_only_default_variant -%}
+                    {%- for option in product.options_with_values -%}
+                      <div class="productSection__variants">
+                        <div class="productSection__variant customSelect productCustomSelect--js">
+                          <p class="productSection__variantLabel">{{- option.name -}}:</p>
+                          <select data-product-handle="{{- product.handle -}}" name="id" class="productIdSelect--js">
+                            {%- for variant in product.variants -%}
+                              <option class="productSection__variantOption customSelect__item p"
+                                {% if variant.selected %} selected{% endif %}
+                                data-variant="{{- variant.id -}}"
+                                data-variant-price="{{- variant.price | money -}}"
+                                data-price="{{- variant.price -}}"
+                                {% if variant.available == false %} disabled{% endif %}
+                                value="{{- variant.id -}}">
+                                {{- variant.title -}}
+                              </option>
+                            {%- endfor -%}
+                          </select>
+                          {%- render 'icons', icon: 'icon-arrow' -%}
+                        </div>
+                      </div>
+                    {%- endfor -%}
+                  {%- else -%}
+                    {%- for variant in product.variants -%}
+                      {%- if variant.available -%}
+                        <input type="hidden" value="{{- variant.id -}}" data-product-handle="{{- product.handle -}}" name="id" class="productItem__variantSelect productIdSelect--js">
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endunless -%}
+                  {%- for variant in product.variants -%}
+                    <quantity-input class="productSection__quantity" {% unless forloop.first %}hidden{% endunless %}
+                    data-value="{{- variant.id -}}">
+                      <p class="productSection__quantityLabel">{{- 'product.quantity_label' | t -}}</p>
+                      <button class="productSection__quantityButton no-js-hidden button--minus" name="minus" type="button">
+                        {%- render 'icons', icon: 'icon-arrow' -%}
+                      </button>
+                        <input class="productSection__quantityInput productSection__formQuantityValue productItem__formQuantityValue"
+                          type="number"
+                          name="quantity"
+                          id="Quantity-{{ section.id }}"
+                          min="1"
+                          max="{{- variant.inventory_quantity -}}"
+                          value="1"
+                        >
+                      <button class="productSection__quantityButton no-js-hidden button--plus" name="plus" type="button">
+                        {%- render 'icons', icon: 'icon-arrow' -%}
+                      </button>
+                    </quantity-input>
+                  {%- endfor -%}
+                </div>
+                {%- if product.description -%}
+                  <div class="productSection__description">
+                    <p class="productSection__descTitle">
+                      {%- render 'icons', icon: 'star' -%}
+                      {{- 'product.description_title' | t -}}
+                    </p>
+                    <p class="productSection__desc">
+                      {{- product.description -}}
+                    </p>
+                  </div>
+                {%- endif -%}
+                <div class="productSection__footer">
+                  {%- if section.settings.show_size_chart -%}
+                    <div class="productSection__sizeChartButton button">
+                      {%- render 'icons', icon: 'T-shirt' -%}
+                      <p class="productSection__sizeChartText">{{- 'product.size_chart_title' | t -}}</p>
+                    </div>
+                    {%- render 'size-chart' -%}
+                  {%- endif -%}
+                  <div class="productSection__formButtonWrapper">
+                    <button data-product="add" class="productItem__formButton button{% unless product.available %} button--disabled{% endunless %}" type="submit">
+                      {%- if product.available -%}
+                        {{- 'product.add_to_card_prod' | t -}}
+                      {%- else -%}
+                        {{- 'product.add_to_card_not_available' | t -}}
+                      {%- endif -%}
+                    </button>
+                  </div>
+                </div>
+              {%- endform -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    {%- if section.settings.border_bottom_icon and section.settings.show_border_bottom -%}
+      <div class="productSection__bottomIcon">{{- section.settings.border_bottom_icon -}}</div>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Product",
+    "class": "productSection",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_border_bottom",
+        "label": "Show border bottom",
+        "default": true
+      },
+      {
+        "type": "html",
+        "id": "border_bottom_icon",
+        "label": "Border bottom",
+        "info": "Use this field for paste svg icon"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_share_icons",
+        "label": "Show share icons",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_size_chart",
+        "label": "Show size chart",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "vendor",
+        "name": "Vendor",
+        "limit": 1
+      },
+      {
+        "type": "form",
+        "name": "Product form",
+        "limit": 1
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product details"
+      }
+    ]
+  }
+{% endschema %}

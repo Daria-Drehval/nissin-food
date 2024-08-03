@@ -1,0 +1,8 @@
+{{ 'common.css' | asset_url | stylesheet_tag }}
+
+{% if template.name ==  'index' %}
+{{ 'homepage.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{% if template.name == 'product' %}
+{{ 'product.css' | asset_url | stylesheet_tag }}
+{% endif %}

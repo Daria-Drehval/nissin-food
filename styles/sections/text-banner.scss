@@ -1,0 +1,79 @@
+@import '../variables';
+
+.textBanner {
+  margin: rem(80) 0 rem(50);
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    margin: rem(20) 0 rem(25);
+  }
+
+  .textBanner__content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto rem(65);
+    max-width: rem(650);
+    position: relative;
+    text-align: left;
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: rem(30);
+      max-width: 100%;
+    }
+
+    .textBanner__icon {
+      @media screen and (max-width: 768px) {
+        max-width: rem(93);
+        scale: 0.5;
+      }
+    }
+
+    .textBanner__text {
+      margin: 0 rem(44);
+      letter-spacing: -0.025rem;
+
+      @media screen and (max-width: 768px) {
+        margin: 0 rem(20);
+        min-width: rem(213);
+      }
+
+      p {
+        font-size: rem(35);
+        line-height: rem(30);
+        margin: rem(10) 0;
+
+        strong {
+          color: $yellow;
+          font-weight: $fw-regular;
+        }
+
+        @media screen and (max-width: 768px) {
+          font-size: rem(18);
+          line-height: rem(16);
+          margin: 0;
+        }
+      }
+    }
+    .textBanner__closeIcon {
+      position: absolute;
+      top: -16%;
+      right: -4.5%;
+      cursor: pointer;
+
+      @media screen and (max-width: 768px) {
+        top: -22%;
+        right: 5%;
+      }
+    }
+  }
+
+  .textBanner__bottomIcon {
+    overflow: hidden;
+
+    @media screen and (max-width: 768px) {
+      left: -2%;
+      position: relative;
+    }
+  }
+}

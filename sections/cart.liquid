@@ -1,0 +1,165 @@
+{%- assign ss = section.settings -%}
+<section data-section-id="{{- section.id -}}" data-section-type="cart">
+  <link rel="stylesheet" href="{{- 'cart.css' | asset_url -}}">
+  <div class="cart__title h2">{{- 'cart.cart_page_title' | t -}}</div>
+    <div class="cartEmpty{% unless cart.empty? %} cartEmpty--hidden{% endunless %}">
+      <div class="cartEmpty__text">
+        <p>{{- 'cart.empty_cart' | t -}}</p>
+        <a href="/" class="cartEmpty__textLink">{{- 'cart.empty_cart_link' | t -}}</a>
+      </div>
+      <div class="cartTotal">
+        <div class="cartTotal__item cartTotal__itemCount">
+          <p>{{- 'cart.cart_count' | t -}}</p>
+          <p>0</p>
+        </div>
+        <div class="cartTotal__item cartTotal__itemPrice">
+          <p class="cartTotal__itemPriceValue">{{- 'cart.cart_total_price' | t -}}</p>
+          <p>0</p>
+        </div>
+        <a class="button cartTotal__checkout" href="/checkout" disabled>{{- 'cart.checkout' | t -}}</a>
+        <a class="cartTotal__continue" href="/">{{- 'cart.continue_shopping' | t -}}</a>
+        {%- render 'icons', icon: "noodle" -%}
+      </div>
+    </div>
+    <div class="cartContent__wrapper{% if cart.empty? %} cartContent__wrapper--hidden{% endif %}">
+      <div class="cartContent">
+        <div class="cartHeading__content">
+          <p class="cartHeading__contentInfo cartHeading__contentItem">{{- 'cart.cart_item' | t -}}</p>
+          <p class="cartHeading__contentPrice cartHeading__contentItem">{{- 'cart.cart_price' | t -}}</p>
+          <p class="cartHeading__contentQuantity cartHeading__contentItem">{{- 'cart.cart_quantity' | t -}}</p>
+          <p class="cartHeading__contentTotal cartHeading__contentItem">{{- 'cart.cart_total' | t -}}</p>
+        </div>
+        <div class="cartItems">
+          {%- if cart.item_count > 0 -%}
+            <div class="cartItems__content">
+              <p class="cartHeading__contentInfo cartHeading__contentItem">{{- 'cart.cart_item' | t -}}</p>
+              <form action="{{- routes.cart_url -}}" method="post">
+                {%- for item in cart.items -%}
+                  <div class="cartItem cartItem__desktop product" data-id="{{- item.id -}}">
+                    <div class="cartItem__productCard">
+                      <div class="cartItem__productCardImage">
+                        {%- render 'lazy-img', class: 'cartItem__image', src: item.image, alt: item.title -%}
+                      </div>
+                      <div class="cartItem__contentItem">
+                        <div class="cartItem__title h6">{{- item.title -}}</div>
+                        <div class="cartItem__vendor p">{{- item.vendor -}}</div>
+                        {%- unless item.product.has_only_default_variant -%}
+                          {%- for option in item.options_with_values -%}
+                            <div class="cartItem__variant">
+                              <p class="cartItem__variantName">{{ option.name }}:</p>
+                              <p class="p">{{ option.value }}</p>
+                            </div>
+                          {%- endfor -%}
+                        {%- endunless -%}
+                        <a class="cartItem__remove">{{- 'cart.cart_remove' | t -}}</a>
+                      </div>
+                    </div>
+                    <div class="cartItem__price p">{{- item.price | money_without_trailing_zeros -}}</div>
+                    <quantity-input class="cartItem__contentQuantity">
+                      <button class="cartItem__quantityButton no-js-hidden button--minus" name="minus" type="button">
+                        {%- render 'icons', icon: 'icon-arrow' -%}
+                      </button>
+                      <input class="cartItem__quantityInput productItem__formQuantityValue"
+                        type="number"
+                        name="updates[]"
+                        id="Quantity-{{- section.id -}}"
+                        min="1"
+                        max="{{- item.variant.inventory_quantity -}}"
+                        value="{{- item.quantity -}}"
+                      >
+                      <button class="cartItem__quantityButton no-js-hidden button--plus" name="plus" type="button">
+                        {%- render 'icons', icon: 'icon-arrow' -%}
+                      </button>
+                    </quantity-input>
+                    <div class="cartItem__contentTotal cartItem__productTotal p"></div>
+                  </div>
+                  <div class="cartItem cartItem__mobile product" data-id="{{- item.id -}}">
+                    <div class="cartItem__heading">
+                      <div class="cartItem__title h6">{{- item.title -}}</div>
+                      <div class="cartItem__price p">{{- item.price | money_without_trailing_zeros -}}</div>
+                      <div class="cartItem__vendor p">{{- item.vendor -}}</div>
+                    </div>
+                    <div class="cartItem__productCard productSection--js">
+                      <div class="cartItem__productCardImage">
+                        {%- render 'lazy-img', class: 'cartItem__image', src: item.image, alt: item.title -%}
+                      </div>
+                      <div class="cartItem__contentItem">
+                        {%- unless item.product.has_only_default_variant -%}
+                          {%- for option in item.options_with_values -%}
+                            <div class="cartItem__variant">
+                              <p class="cartItem__variantName">{{ option.name }}:</p>
+                              <p class="p">{{ option.value }}</p>
+                            </div>
+                          {%- endfor -%}
+                        {%- endunless -%}
+                        <div class="cartItem__quantity">
+                          <p class="cartItem__quantityTitle">{{ 'cart.cart_quantity' | t }}:</p>
+                          <div class="cartItem__contentQuantity customSelect productCustomSelect--js">
+                            <select data-product-handle="{{- item.handle -}}" name="id" class="productIdSelect--js cartItem__quantityInput productItem__formQuantityValue">
+                              {%- if item.variant.inventory_policy == 'continue' and item.variant.inventory_quantity < 1 -%}
+                                {%- assign variantQuantity = 20 -%}
+                              {%- else -%}
+                                {%- assign variantQuantity = item.variant.inventory_quantity -%}
+                              {%- endif -%}
+                              {%- for quantity in (1..variantQuantity) -%}
+                                <option {% if item.quantity == forloop.index%} selected{% endif %} class="productSection__variantOption customSelect__item p"
+                                  value="{{- quantity -}}">
+                                  {{- quantity -}}
+                                </option>
+                              {%- endfor -%}
+                            </select>
+                            <div class="cartItem__quantityButton no-js-hidden">
+                              {%- render 'icons', icon: 'icon-arrow' -%}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cartItem__contentTotal">
+                          <p class="cartItem__contentTotalTitle">{{ 'cart.cart_total' | t }}: </p>
+                          <p class="cartItem__productTotal p productSection__price--js"></p>
+                        </div>
+                        <a class="cartItem__remove">{{- 'cart.cart_remove' | t -}}</a>
+                      </div>
+                    </div>
+                  </div>
+                {%- endfor -%}
+              </form>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="cartTotal">
+        <div class="cartTotal__item cartTotal__itemCount">
+          <p>{{- 'cart.cart_count' | t -}}</p>
+          <p class="cartTotal__itemQty">{{- cart.item_count -}}</p>
+        </div>
+        <div class="cartTotal__item cartTotal__itemPrice">
+          <p class="cartTotal__itemPriceValue">{{- 'cart.cart_total_price' | t -}}</p>
+          <p class="cartTotal__value">{{- cart.total_price | money_without_trailing_zeros -}}</p>
+        </div>
+        <a class="button cartTotal__checkout" href="/checkout">{{- 'cart.checkout' | t -}}</a>
+        <a class="cartTotal__continue" href="/">{{- 'cart.continue_shopping' | t -}}</a>
+        {%- render 'icons', icon: "noodle" -%}
+      </div>
+      <div class="cartFooter">
+        <cart-note class="cartFooter__field cart__note field">
+          <label class="cartFooter__title h5" for="Cart-note">{{- 'cart.cart_footer' | t -}}</label>
+          <textarea class="cartFooter__textarea" name="note" id="Cart-note" placeholder="{{- 'cart.note' | t }}">{{ cart.note -}}</textarea>
+        </cart-note>
+      </div>
+    </div>
+  {%- render 'icons', icon: "noodle" -%}
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "class": "cart",
+  "settings": [
+  ],
+  "presets": [
+    {
+      "name": "Cart"
+    }
+  ]
+}
+{% endschema %}

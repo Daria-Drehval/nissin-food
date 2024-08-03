@@ -1,0 +1,51 @@
+<div class="sizeChart__overlay">
+  <div class="productSection__sizeChart hidden">
+    <div class="productSection__sizeChartHeader">
+      {%- render 'icons', icon: 'T-shirt' -%}
+      <h4 class="productSection__sizeChartTitle">{{- 'product.size_chart_title' | t -}}</h4>
+    </div>
+    <div class="productSection__sizeChartContent">
+      {%- if product.metafields.custom.chart_header -%}
+        <div class="productSection__sizeChartContentRow">
+          <p class="productSection__sizeChartRowTitle">{{- product.metafields.custom.measurement -}}</p>
+          <div class="productSection__sizeChartRowContent">
+            {%- for item in product.metafields.custom.chart_header.value -%}
+              <p class="productSection__sizeChartItem">{{- item -}}</p>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if product.metafields.custom.first_measurement_values -%}
+        <div class="productSection__sizeChartContentRow">
+          <p class="productSection__sizeChartRowTitle">{{- product.metafields.custom.first_measurement -}}</p>
+          <div class="productSection__sizeChartRowContent">
+            {%- for item in product.metafields.custom.first_measurement_values.value -%}
+              <p class="productSection__sizeChartItem">{{- item -}}</p>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if product.metafields.custom.second_measurement_values -%}
+        <div class="productSection__sizeChartContentRow">
+          <p class="productSection__sizeChartRowTitle">{{- product.metafields.custom.second_measurement -}}</p>
+          <div class="productSection__sizeChartRowContent">
+            {%- for item in product.metafields.custom.second_measurement_values.value -%}
+              <p class="productSection__sizeChartItem">{{- item -}}</p>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if product.metafields.custom.third_measurement_values -%}
+        <div class="productSection__sizeChartContentRow">
+          <p class="productSection__sizeChartRowTitle">{{- product.metafields.custom.third_measurement -}}</p>
+          <div class="productSection__sizeChartRowContent">
+            {%- for item in product.metafields.custom.third_measurement_values.value -%}
+              <p class="productSection__sizeChartItem">{{- item -}}</p>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+    {%- render 'icons', icon: "close" -%}
+  </div>
+</div>

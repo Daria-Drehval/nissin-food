@@ -1,0 +1,46 @@
+<section data-section-id="{{ section.id }}" data-section-type="leading-products">
+  <link rel="stylesheet" href="{{- 'leading-products.css' | asset_url -}}">
+  <script src="{{- 'leading-products.js' | asset_url -}}" defer></script>
+  <div class="leadingProducts__wrapper">
+    <h2 class="leadingProducts__title">leading noodle products</h2>
+    <div class="leadingProducts__content">
+      {%- for product in collections['all'].products limit: 3 -%}
+        <div class="leadingProducts__item">
+          <div class="leadingProducts__itemImageBlock">
+            {%- render 'lazy-img',
+              class: 'leadingProducts__image'
+              product_img_url: '286x347'
+            -%}
+          </div>
+          <div class="leadingProducts__itemInfo">
+            <h5 class="leadingProducts__itemTitle">{{- product.title -}}</h5>
+            <div class="leadingProducts__itemButtons">
+              <a href="{{ product.url }}" class="leadingProducts__button leadingProducts__buttonBuy button buy--button">
+                {%- render 'icons', icon: 'local' -%}
+                Where to buy
+              </a>
+              <a href="{{ product.url }}" class="leadingProducts__button leadingProducts__buttonDetails button button--red">Details</a>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="leadingProducts__buttonAll">
+      <a href="{{- collections['all'].url -}}" class="button">view ALL products</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+
+{
+  "name": "Leading products",
+  "class": "leadingProducts",
+  "presets": [
+    {
+      "name": "Leading products"
+    }
+  ]
+}
+
+{% endschema %}

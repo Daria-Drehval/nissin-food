@@ -1,0 +1,29 @@
+{%- assign ss = section.settings -%}
+<section data-section-id="{{ section.id }}" data-section-type="product-list">
+  <link rel="stylesheet" href="{{- 'product-list.css' | asset_url -}}" async>
+  <link rel="stylesheet" href="{{- 'product-card.css' | asset_url -}}" async>
+  <div class="productList__wrapper container">
+    <div class="productList__title h2">
+      {{ collection.title }} {{-'collection.title' | t }}
+    </div>
+    <div class="productList__content">
+      {%- for product in collection.products -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+
+{
+  "name": "Product list",
+  "class": "productList",
+  "presets": [
+    {
+      "name": "Product list"
+    }
+  ]
+}
+
+{% endschema %}

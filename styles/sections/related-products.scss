@@ -1,0 +1,53 @@
+@import '../variables';
+@import '../typography';
+
+.relatedProducts__wrapper {
+  margin-bottom: rem(50);
+
+  .relatedProducts__headerTitle {
+    text-align: center;
+    margin: rem(57) rem(10);
+
+    @media screen and (max-width: 768px) {
+      margin: rem(22) rem(25) rem(38);
+    }
+  }
+
+  .productItem__imageWrapper {
+    height: rem(286);
+    width: rem(286);
+  }
+
+  .productItem__image {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    max-width: 100%;
+
+    @media screen and (max-width: 768px) {
+      height: rem(355);
+      width: rem(355);
+    }
+  }
+
+  .slick-arrow {
+    background: $red;
+    bottom: -5%;
+    height: rem(43);
+    min-width: rem(43);
+    position: absolute;
+    z-index: 1;
+
+    &:hover {
+      background: $yellow;
+    }
+  }
+
+  .prev-arrow {
+    left: 35%;
+  }
+
+  .next-arrow {
+    right: 34%;
+  }
+}

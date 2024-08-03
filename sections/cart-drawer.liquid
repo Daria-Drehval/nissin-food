@@ -1,0 +1,48 @@
+<div data-section-id="{{ section.id }}" data-section-type="cart-drawer">
+  <div class="cartDrawer__overlay"></div>
+    <div class="cartDrawer">
+      {%- render 'icons', icon: 'drawer-icon' -%}
+      <link rel="stylesheet" href="{{ 'cart-drawer.css' | asset_url }}">
+      <div class="cartDrawer__header">
+        {%- render 'icons', icon: 'cart-icon' -%}
+        <div class="cartDrawer__title h5">
+          {{- 'cart.cart_title' | t -}}
+        </div>
+      </div>
+      <div class="cartDrawer__content">
+        <form>
+          <div class="cartDrawer__products">
+            {%- for product in cart.items -%}
+            <div class="cartDrawer__product cartDrawer__item-{{- product.id -}}" data-id="{{- product.id -}}">
+              <div class="cartDrawer__productContent">
+                {%- render 'lazy-img', class: 'cartDrawer__image', src: product.image, alt: product.title -%}
+                <p class="cartDrawer__productTitle">{{- product.title | truncatewords: 5 -}}</p>
+              </div>
+              <div class="cartDrawer__productInfo">
+                <div class="cartDrawer__productOtions">
+                  <p class="cartDrawer__productPrice">{{- product.variant.price | money -}}</p>
+                  <p class="cartDrawer__productQty">{{- 'cart.cart_qty' | t -}}:{{- product.quantity -}}</p>
+                  {%- unless product.product.has_only_default_variant -%}
+                    {% for option in product.options_with_values -%}
+                      <p class="cartDrawer__productVariant">{{ option.name }}: {{ option.value }}</p>
+                    {%- endfor %}
+                  {%- endunless -%}
+                </div>
+                <p class="cartDrawer__productRemove">{{- 'cart.cart_remove' | t -}}</p>
+              </div>
+            </div>
+            {%- endfor -%}
+          </div>
+        </form>
+      </div>
+      <div class="cartDrawer__footer">
+        <div class="cartDrawer__footerSubtotal">
+          <p class="cartDrawer__footerSubtotalTitle">{{- 'cart.cart_subtotal' | t -}}</p>
+          <span class="cartDrawer__footerSubtotalMoney">{{- cart.total_price | money -}}</span>
+        </div>
+        <a class="button cartDrawer__footerButton" href="/cart">
+          {{- 'cart.cart_button' | t -}}
+        </a>
+      </div>
+    </div>
+  </div>

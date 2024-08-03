@@ -1,0 +1,63 @@
+{%- assign ss = section.settings -%}
+{%- if ss.show_section -%}
+  <section data-section-id="{{ section.id }}" data-section-type="text-banner">
+    <link rel="stylesheet" href="{{- 'text-banner.css' | asset_url -}}" async>
+    <script src="{{- 'text-banner.js' | asset_url -}}" defer></script>
+    <div class="textBanner">
+      <div class="textBanner__content">
+        {%- if ss.icon -%}
+          <div class="textBanner__icon">{{- ss.icon -}}</div>
+        {%- endif -%}
+        {%- if ss.text -%}
+          <h3 class="textBanner__text">{{- ss.text -}}</h3>
+        {%- endif -%}
+        {%- render 'icons', icon: "close" -%}
+      </div>
+      {%- if ss.border_bottom_icon and ss.show_border_bottom -%}
+        <div class="textBanner__bottomIcon">{{- ss.border_bottom_icon -}}</div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Text banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show section",
+      "default": true
+    },
+    {
+      "type": "html",
+      "id": "icon",
+      "label": "Icon",
+      "info": "Use this field for paste svg icon"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Banner text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_bottom",
+      "label": "Show border bottom",
+      "default": true
+    },
+    {
+      "type": "html",
+      "id": "border_bottom_icon",
+      "label": "Border bottom",
+      "info": "Use this field for paste svg icon"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text banner"
+    }
+  ]
+}
+{% endschema %}

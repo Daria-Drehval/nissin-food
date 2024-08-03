@@ -1,0 +1,31 @@
+$fs10: 10px;
+$body-font-size: 16;
+
+
+@function rem($pxval) {
+  @return ($pxval / $body-font-size) * 1rem;
+}
+
+@function em($pxval, $base: $body-font-size) {
+  @return ($pxval / $base) * 1em;
+}
+
+$font-family: 'Cubano';
+$font-family-button: 'Manrope-SemiBold';
+$font-family-button-bold: 'Manrope-ExtraBold';
+
+$fw-thin: 100;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+$fw-extra-bold: 800;
+
+$black: #000;
+$grey: #f8f8f8;
+$dark-grey: #e8e8e8;
+$disabled-grey: #c0c0c0;
+$red: #ed1d24;
+$yellow: #fbad1b;
+$white: #ffffff;

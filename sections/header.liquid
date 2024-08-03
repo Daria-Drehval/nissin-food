@@ -1,0 +1,100 @@
+{%- assign ss = section.settings -%}
+
+<header data-section-id="{{ section.id }}" data-section-type="header" style="background: {{ ss.background }};">
+  <div class="header__wrapper">
+    <link rel="stylesheet" href="{{- 'header.css' | asset_url -}}" async>
+    <script src="{{- 'header.js' | asset_url -}}" defer></script>
+    <div class="header__content">
+      <ul class="header__menu">
+        {%- for link in ss.header_menu.links -%}
+          <li class="header__menuLink">
+            {%- unless link.title contains 'Logo' -%}
+              <a href="{{- link.url -}}" class="header__link{% if request.path == link.url %} current{% endif %}">{{- link.title -}}</a>
+            {%- else -%}
+              {%- if ss.header_logo -%}
+                <a href="/" class="header__logo">
+                  <img class="header__logoImage" src="{{- ss.header_logo | img_url: '200x100' -}}" alt="{{- ss.header_logo.alt -}}">
+                </a>
+              {%- else -%}
+                <span>{{- shop.name -}}</span>
+              {%- endif -%}
+            {%- endunless -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="header__content--right">
+      <div class="header__cart">
+        {%- render 'icons', icon: 'cart' -%}
+        <p class="header__cartText">{{- 'cart.cart_text' | t -}}</p>
+        <p class="header__cartItems">({{- cart.item_count -}})</p>
+      </div>
+      <div class="header__search">
+        <div class="header__searchButton">
+          {%- render 'icons', icon: 'search' -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header__contentMobile">
+    <div class="header__contentMobile--left">
+      <div class="header__contentMobileMenuButton">
+        {%- render 'icons', icon: 'menu-button' -%}
+      </div>
+      <ul class="header__menuMobile hidden">
+        {%- for link in ss.header_menu.links -%}
+          <li class="header__menuLink">
+            {%- unless link.title contains 'Logo' -%}
+              <a href="{{- link.url -}}" class="header__link">{{- link.title -}}</a>
+            {%- endunless -%}
+          </li>
+        {%- endfor -%}
+        {%- render 'icons', icon: "close" -%}
+      </ul>
+      <div class="header__search">
+        <div class="header__searchButton">
+          {%- render 'icons', icon: 'search' -%}
+        </div>
+      </div>
+    </div>
+    {%- if ss.header_logo -%}
+      <a href="/" class="header__logo">
+        <img class="header__logoImage" src="{{- ss.header_logo | img_url: '200x100' -}}" alt="{{- ss.header_logo.alt -}}">
+      </a>
+    {%- else -%}
+      <span>{{- shop.name -}}</span>
+    {%- endif -%}
+    <div class="header__cart">
+      {%- render 'icons', icon: 'cart' -%}
+      <p class="header__cartItems">({{- cart.item_count -}})</p>
+    </div>
+  </div>
+  <div class="header__search">
+    {%- render 'search-form' -%}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color",
+      "default": "#fff"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "header_menu",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}

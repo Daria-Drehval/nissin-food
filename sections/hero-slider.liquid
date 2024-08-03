@@ -1,0 +1,101 @@
+{%- if section.settings.is_hero_slider and section.blocks.size > 0 -%}
+  <section data-section-id="{{ section.id }}" data-section-type="hero-slider">
+    <link rel="stylesheet" href="{{- 'hero-slider-section.css' | asset_url -}}" async>
+    <script src="{{- 'hero-slider-section.js' | asset_url -}}" defer></script>
+    <div class="heroSlider">
+      {%- for slide in section.blocks -%}
+        <div class="heroSlide__wrapper">
+          <div class="heroSlide heroSlide--{{ forloop.index }}">
+            <div class="heroSlide__content">
+              <h4 class="heroSlide__title">{{- slide.settings.slide_title -}}</h4>
+              <p class="heroSlide__text" style="color: {{- slide.settings.text_color | remove: 'rgba(0,0,0,0)' | default: '#ffffff' -}}">
+                {{- slide.settings.slide_description -}}
+              </p>
+              <a class="heroSlide__button button" href="{{- slide.settings.slide_link -}}">{{- slide.settings.slide_link_text -}}</a>
+            </div>
+            <div class="heroSlide__images{% unless slide.settings.slide_image_mobile != blank %} heroSlide__images--desktopOnly{% endunless %}">
+              {%- render 'lazy-img',
+                class: 'heroSlide__image heroSlide__image--desktop',
+                src: slide.settings.slide_image,
+                alt: slide.settings.slide_title -%}
+              {%- if slide.settings.slide_image_mobile != blank -%}
+                {%- render
+                  'lazy-img',
+                  class: 'heroSlide__image heroSlide__image--mobile',
+                  src: slide.settings.slide_image_mobile,
+                  alt: slide.settings.slide_title
+                -%}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+  </section>
+{%- endif -%}
+
+
+{% schema %}
+
+{
+  "name": "Hero slider",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "is_hero_slider",
+      "label": "Show hero slider",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "label": "Image",
+          "id": "slide_image",
+          "type": "image_picker"
+        },
+        {
+          "label": "Image mobile",
+          "id": "slide_image_mobile",
+          "type": "image_picker"
+        },
+        {
+          "label": "Title",
+          "id": "slide_title",
+          "type": "text"
+        },
+        {
+          "label": "Short description",
+          "id": "slide_description",
+          "type": "text"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color"
+        },
+        {
+          "label": "Link",
+          "id": "slide_link",
+          "type": "url"
+        },
+        {
+          "label": "Link text",
+          "id": "slide_link_text",
+          "type": "text",
+          "default": "learn more"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slider"
+    }
+  ]
+}
+
+{% endschema %}

@@ -1,0 +1,65 @@
+{%- assign ss = section.settings -%}
+<section data-section-id="{{ section.id }}" data-section-type="hero-banner">
+  <link rel="stylesheet" href="{{- 'hero-banner.css' | asset_url -}}" async>
+  <div class="heroBanner__wrapper">
+    <div class="heroBanner__content">
+      <button class="heroBanner__contentButton button" onclick="window.history.back();">
+        {%- render 'icons', icon: 'icon-arrow' -%}
+        {{- 'product.back_button' | t -}}
+      </button>
+      <div class="heroBanner__title h1" style="color: {{- ss.title_color | remove: 'rgba(0,0,0,0)' | default: '#ffffff' -}}">
+        {{- collection.title -}}
+      </div>
+      {%- if ss.show_descrition -%}
+        <p class="heroBanner__descrition">
+          {{- collection.description | truncate: 400 -}}
+        </p>
+      {%- endif -%}
+    </div>
+    <div class="heroBanner__images">
+      {%- if collection.image -%}
+        {%- render 'lazy-img',
+          class: 'heroBanner__image',
+          src: collection.image,
+          alt: collection.title -%}
+      {%- else -%}
+        {%- render 'lazy-img',
+          class: 'heroBanner__image',
+          src: ss.hero_image,
+          alt: ss.collection.title -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+
+{
+  "name": "Hero banner",
+  "class": "heroBanner",
+  "settings": [
+    {
+      "label": "Image",
+      "id": "hero_image",
+      "type": "image_picker"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_descrition",
+      "label": "Show descrition",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
+}
+
+{% endschema %}

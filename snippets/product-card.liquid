@@ -1,0 +1,62 @@
+<div class="productItem">
+  <a href="{{- product.url -}}" class="productItem__content">
+    <div class="productItem__imageWrapper">
+      {%- if product.tags.size > 0 -%}
+        <div class="productItem__tag">
+          {{- product.tags[0] -}}
+        </div>
+      {%- endif -%}
+      {%- render 'lazy-img', class: 'productItem__image', src: product.featured_image.src, alt: product.title -%}
+    </div>
+    <div class="productItem__info">
+      <div class="productItem__title h6">
+        {{- product.title -}}
+      </div>
+      <div class="productItem__priceWrapper">
+        {%- if product.compare_at_price > product.price -%}
+          <p class="productItem__price--compare">
+            {{- product.compare_at_price | money -}}
+          </p>
+        {%- endif -%}
+        <p class="productItem__price">
+          {{- product.price | money -}}
+        </p>
+      </div>
+      {%- form 'product', product, class: "productItem__form", novalidate: 'novalidate' -%}
+        <input type="hidden" name="quantity" value="1" readonly class="productItem__formQuantityValue">
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="productItem__variants" hidden>
+              <p class="productItem__variantLabel p--caption">{{- option.name -}}</p>
+              <div class="productItem__variant">
+                <select data-product-handle="{{- product.handle -}}" name="id" class="productIdSelect--js">
+                  {%- for variant in product.variants -%}
+                    <option class="productSection__variantOption"
+                      value="{{- variant.id -}}">
+                      {{- variant.title -}}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for variant in product.variants -%}
+            {%- if variant.available -%}
+              <input type="hidden" value="{{- variant.id -}}" data-product-handle="{{- product.handle -}}" name="id" class="productItem__variantSelect productIdSelect--js">
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endunless -%}
+        <div class="productItem__button">
+          <button data-product="add" class="productItem__formButton button{% unless product.available %} button--disabled{% endunless %}" type="submit" {% unless product.available %} disabled{% endunless %}>
+            {%- if product.available -%}
+              {{- 'product.add_to_card' | t -}}
+            {%- else -%}
+              {{- 'product.add_to_card_not_available' | t -}}
+            {%- endif -%}
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+  </a>
+</div>

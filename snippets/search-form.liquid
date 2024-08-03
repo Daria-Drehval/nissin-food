@@ -1,0 +1,18 @@
+<div class="search__modal">
+  <script src="{{- 'header.js' | asset_url -}}" defer></script>
+  <form action="{{ routes.search_url }}">
+    <input type="text"
+      placeholder="Search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      class="search__modalInput"
+    />
+    <input type="hidden" name="type" value="product,page" />
+    <input type="hidden" name="options[unavailable_products]" value="hide" />
+    <input type="hidden" name="options[prefix]" value="last" />
+    <button type="submit" class="search__modalButton">
+      {%- render 'icons', icon: "search" -%}
+    </button>
+  </form>
+  {%- render 'icons', icon: "close" -%}
+</div>

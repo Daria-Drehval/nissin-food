@@ -1,0 +1,83 @@
+{%- assign ss = section.settings -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section data-section-id="{{- section.id -}}" data-section-type="featured-product">
+    <link rel="stylesheet" href="{{- 'featured-product.css' | asset_url -}}" async>
+    <link rel="stylesheet" href="{{- 'product-card.css' | asset_url -}}" async>
+    <script src="{{- 'featured-product.js' | asset_url -}}" defer></script>
+    <div class="featuredProduct container">
+      <div class="featuredProduct__header">
+        <h2 class="featuredProduct__heading">{{- ss.heading -}}</h2>
+        <div class="featuredProduct__collections featuredProduct__collections--slider">
+          {%- for block in section.blocks -%}
+            <div class="featuredProduct__collection{% if forloop.first %} selected{% endif %}" data-collection-index="{{ forloop.index0 }}">
+              {{- block.settings.collection_icon -}}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="featuredProduct__wrapper">
+          {%- assign featured_collection = collections[block.settings.collection] -%}
+          <div class="featuredProduct__content{% unless forloop.first %} hidden{% endunless %}" data-content-index="{{- forloop.index0 -}}">
+            <div class="featuredProduct__products featuredProduct__products--slider">
+              {%- for product in featured_collection['products'] limit: ss.products_limit -%}
+                {%- render 'product-card', product: product -%}
+              {%- endfor -%}
+            </div>
+            <div class="featuredProduct__buttonAll">
+              <a href="{{- featured_collection.url -}}" class="button">
+                {{- 'collection.view_all' | t -}}
+                {%- render 'icons', icon: "arrow" -%}
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Featured product"
+      },
+      {
+        "type": "number",
+        "id": "products_limit",
+        "label": "Products amount",
+        "default": 8
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Tab collections",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "html",
+            "id": "collection_icon",
+            "label": "Icon",
+            "info": "Use this field for paste svg icon"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured products"
+      }
+    ]
+  }
+{% endschema %}

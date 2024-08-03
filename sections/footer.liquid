@@ -1,0 +1,140 @@
+{%- assign ss = section.settings -%}
+<footer class="footer" style="background: {{ ss.background }};" data-section-id="{{ section.id }}" data-section-type="footer">
+  <div class="footer__wrapper">
+  <link rel="stylesheet" href="{{- 'footer.css' | asset_url -}}" async>
+  <script src="{{- 'footer.js' | asset_url -}}" defer></script>
+    <div class="footer__socialBlocks">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'social' -%}
+            <div class="footer__socialMedia">
+              {%- if block.settings.logo -%}
+                <div class="footer__socialLogo">
+                  {%- render 'lazy-img', src: block.settings.logo, alt: block.settings.logo.alt -%}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.facebook or block.settings.instagram or block.settings.twitter or block.settings.tiktok -%}
+                <div class="footer__socialLinks">
+                  {%- if block.settings.facebook -%}
+                    <a class="footer__socialLink footer__socialLink--facebook" href="{{ block.settings.facebook }}">
+                      {%- render 'icons', icon: "facebook" -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if block.settings.instagram -%}
+                    <a class="footer__socialLink footer__socialLink--instagram" href="{{ block.settings.instagram }}">
+                      {%- render 'icons', icon: "instagram" -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if block.settings.twitter -%}
+                    <a class="footer__socialLink footer__socialLink--twitter" href="{{ block.settings.twitter }}">
+                      {%- render 'icons', icon: "twitter" -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if block.settings.tiktok -%}
+                    <a class="footer__socialLink footer__socialLink--tiktok" href="{{ block.settings.tiktok }}">
+                      {%- render 'icons', icon: "tiktok" -%}
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+    {% if ss.newsletter_toggle %}
+      <div class="footer__newsletter">
+        <div class="footer__newsletterTitle h1">{{- 'footer.newsletter' | t -}}</div>
+        <p class="footer__newsletterText">{{- 'footer.newsletter_text' | t -}}</p>
+        {%- form 'customer', id: 'footer-newsletter', class: 'footer__newsletterForm' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form__alert alert--success">{{ 'footer.success' | t }}</p>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="form__alert alert--error">{{ form.errors.messages['email'] }}</p>
+            {%- endif -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input type="email" name="contact[email]" class="form__input" aria-label="{{- 'footer.newsletter_input' | t -}}" placeholder="{{- 'footer.newsletter_input' | t -}}" required>
+            <button type="submit" class="form__submit button button--black">{{- 'footer.newsletter_button' | t -}}</button>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+    <ul class="footer__menu">
+      {%- for link in ss.footer_menu.links -%}
+        <li class="footer__menuLink">
+          <a href="{{- link.url -}}" class="footer__link">{{- link.title -}}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if ss.copyright_toggle -%}
+      {%- assign copyright_year = "now" | date: "%Y" -%}
+      <div class="footer__copyright">
+        © {{- copyright_year -}} <p>{{- shop.name -}}.</p>{{- 'footer.copyright' | t -}}
+      </div>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color",
+      "default": "#fff"
+    },
+    {
+			"type": "checkbox",
+			"id": "newsletter_toggle",
+			"label": "Show newsletter",
+			"default": true
+		},
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Menu"
+    },
+    {
+			"type": "checkbox",
+			"id": "copyright_toggle",
+			"label": "Show copyright",
+			"default": true
+		}
+  ],
+  "blocks": [
+		{
+			"type": "social",
+			"name": "Social",
+			"settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+         "type": "url",
+         "id": "facebook",
+         "label": "Facebook"
+        },
+        {
+         "type": "url",
+         "id": "instagram",
+         "label": "Instagram"
+        },
+        {
+         "type": "url",
+         "id": "twitter",
+         "label": "Twitter"
+        },
+        {
+         "type": "url",
+         "id": "tiktok",
+         "label": "Tik tok"
+        }
+			]
+		}
+  ]
+}
+{% endschema %}
