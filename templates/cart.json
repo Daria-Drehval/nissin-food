@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "test": {
+      "type": "test",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "650c3ba7-65f9-4f5b-b103-af8d19494a19": {
+      "type": "cart",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "test",
+    "650c3ba7-65f9-4f5b-b103-af8d19494a19"
+  ]
+}

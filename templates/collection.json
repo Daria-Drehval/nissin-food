@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "test": {
+      "type": "test",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "da2200d3-5561-4fff-9d07-18710ce5e022": {
+      "type": "hero-banner",
+      "settings": {
+        "hero_image": "shopify:\/\/shop_images\/Mask_group.png",
+        "title_color": "#fafafa",
+        "show_descrition": false
+      }
+    },
+    "0fa02a35-e091-4cae-9caa-c179ee52d6eb": {
+      "type": "product-list",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "test",
+    "da2200d3-5561-4fff-9d07-18710ce5e022",
+    "0fa02a35-e091-4cae-9caa-c179ee52d6eb"
+  ]
+}
