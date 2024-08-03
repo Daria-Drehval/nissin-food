@@ -1,0 +1,56 @@
+.announcementBar {
+  padding: 0.625rem 1.1875rem 0.9375rem;
+  position: relative; }
+  @media screen and (max-width: 768px) {
+    .announcementBar {
+      padding: 1.25rem 1.1875rem 0.75rem; } }
+  .announcementBar .announcementBar__wrapper {
+    align-items: center;
+    display: grid;
+    justify-items: center; }
+    .announcementBar .announcementBar__wrapper .announcementBar__content {
+      align-items: center;
+      display: flex;
+      justify-content: center; }
+      @media screen and (max-width: 768px) {
+        .announcementBar .announcementBar__wrapper .announcementBar__content .announcementBar__icon svg {
+          height: 1.4375rem;
+          width: 1.625rem; } }
+      .announcementBar .announcementBar__wrapper .announcementBar__content .announcementBar__title {
+        font-size: 1.5625rem;
+        font-weight: 400;
+        line-height: 1.35625rem;
+        margin-left: 0.3125rem;
+        text-transform: uppercase; }
+        @media screen and (max-width: 768px) {
+          .announcementBar .announcementBar__wrapper .announcementBar__content .announcementBar__title {
+            font-size: 1rem;
+            line-height: 0.86875rem;
+            margin-bottom: 0.3125rem;
+            margin-left: 0.6875rem; } }
+        .announcementBar .announcementBar__wrapper .announcementBar__content .announcementBar__title p {
+          font-size: 1.5625rem;
+          margin: 0;
+          letter-spacing: -0.02rem; }
+          .announcementBar .announcementBar__wrapper .announcementBar__content .announcementBar__title p strong {
+            color: #fbad1b;
+            font-weight: 400; }
+          @media screen and (max-width: 768px) {
+            .announcementBar .announcementBar__wrapper .announcementBar__content .announcementBar__title p {
+              font-size: 1rem; } }
+    .announcementBar .announcementBar__wrapper .announcementBar__linkContent {
+      position: absolute;
+      justify-self: flex-end; }
+      @media screen and (max-width: 991px) {
+        .announcementBar .announcementBar__wrapper .announcementBar__linkContent {
+          display: none; } }
+      .announcementBar .announcementBar__wrapper .announcementBar__linkContent .announcementBar__link {
+        color: #000;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 0.98687rem;
+        text-decoration: none;
+        text-transform: uppercase; }
+        .announcementBar .announcementBar__wrapper .announcementBar__linkContent .announcementBar__link::after {
+          opacity: 0; }
+

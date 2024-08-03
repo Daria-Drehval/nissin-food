@@ -1,0 +1,308 @@
+.productSection .productSection__wrapper {
+  display: flex;
+  gap: 1.875rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1310px;
+  padding: 5.625rem 0.625rem 0;
+  position: relative; }
+  @media screen and (max-width: 1000px) {
+    .productSection .productSection__wrapper {
+      flex-wrap: wrap;
+      padding: 4.875rem 0.625rem 0; } }
+  .productSection .productSection__wrapper .productSection__slider {
+    display: flex;
+    gap: 1.25rem;
+    max-width: 55%; }
+    @media screen and (max-width: 1000px) {
+      .productSection .productSection__wrapper .productSection__slider {
+        flex-direction: column-reverse;
+        gap: 0.75rem;
+        max-width: 100%; } }
+    .productSection .productSection__wrapper .productSection__slider .productSection__images {
+      max-width: 36.25rem; }
+      @media screen and (max-width: 1000px) {
+        .productSection .productSection__wrapper .productSection__slider .productSection__images {
+          max-width: 100%; } }
+      .productSection .productSection__wrapper .productSection__slider .productSection__images:hover .productSection__image {
+        -ms-transform: scale(1.1);
+        -o-transition: 3s;
+        -webkit-transform: scale(1.1);
+        -webkit-transition: 3s;
+        transform: scale(1.1);
+        transition: 3s; }
+      @media screen and (min-width: 1001px) {
+        .productSection .productSection__wrapper .productSection__slider .productSection__images .slick-list {
+          max-height: 43.75rem;
+          overflow: scroll;
+          -ms-overflow-style: none;
+          scrollbar-width: none; }
+          .productSection .productSection__wrapper .productSection__slider .productSection__images .slick-list::-webkit-scrollbar {
+            display: none; } }
+      @media screen and (min-width: 1001px) {
+        .productSection .productSection__wrapper .productSection__slider .productSection__images .slick-track {
+          max-height: 43.75rem;
+          -ms-overflow-style: none;
+          scrollbar-width: none; } }
+      .productSection .productSection__wrapper .productSection__slider .productSection__images .productSection__image {
+        -o-object-fit: cover;
+        border-radius: 30px;
+        width: 100%;
+        max-width: 36.25rem;
+        object-fit: cover;
+        height: 36.25rem; }
+        @media screen and (max-width: 1000px) {
+          .productSection .productSection__wrapper .productSection__slider .productSection__images .productSection__image {
+            max-width: 100%;
+            height: 100%;
+            min-width: 22.125rem; } }
+    .productSection .productSection__wrapper .productSection__slider .productSection__imagesGallery {
+      max-width: 6.25rem; }
+      @media screen and (max-width: 1000px) {
+        .productSection .productSection__wrapper .productSection__slider .productSection__imagesGallery {
+          max-width: 100%;
+          min-width: 100%; } }
+    .productSection .productSection__wrapper .productSection__slider .productSection__galleryNav .productSection__image.slick-current {
+      opacity: 1; }
+    .productSection .productSection__wrapper .productSection__slider .productSection__galleryNav .productSection__image {
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 0.5625rem;
+      max-width: 6.25rem;
+      opacity: .5;
+      transition: .25s ease;
+      width: 100%; }
+      @media screen and (max-width: 1000px) {
+        .productSection .productSection__wrapper .productSection__slider .productSection__galleryNav .productSection__image {
+          height: 100%;
+          min-width: 5.1875rem;
+          margin-bottom: 0;
+          margin-right: 0.5625rem; } }
+  .productSection .productSection__wrapper .productSection__contentHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.8125rem; }
+    @media screen and (max-width: 768px) {
+      .productSection .productSection__wrapper .productSection__contentHeader {
+        margin-bottom: 0.9375rem; } }
+    .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentHeaderButton {
+      background-color: transparent;
+      border: 2px solid #000;
+      font-size: 16px;
+      min-width: 5.4375rem;
+      padding: 0.6875rem 0.9375rem;
+      text-transform: uppercase; }
+      @media screen and (max-width: 1000px) {
+        .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentHeaderButton {
+          position: absolute;
+          top: 1.1875rem; } }
+      .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentHeaderButton:hover {
+        background-color: transparent;
+        color: #ed1d24; }
+      .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentHeaderButton svg {
+        fill: #ed1d24;
+        margin-right: 0.3125rem; }
+    .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare {
+      align-items: center;
+      display: flex;
+      gap: 1.1875rem; }
+      @media screen and (max-width: 1000px) {
+        .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare {
+          width: 100%; } }
+      .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareTitle {
+        font-family: "Manrope-SemiBold";
+        text-transform: uppercase; }
+      .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareIcons {
+        display: flex;
+        gap: 0.375rem; }
+        .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareIcons .productSection__contentShareIcon {
+          width: 2.5625rem;
+          height: 2.5625rem;
+          border-radius: 50%; }
+          .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareIcons .productSection__contentShareIcon svg {
+            height: 100%;
+            padding: 0.8125rem;
+            width: 100%; }
+          .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareIcons .productSection__contentShareIcon::after {
+            display: none; }
+          .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareIcons .productSection__contentShareIcon.productSection__contentShareIcon--facebook {
+            background-color: #385894; }
+          .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareIcons .productSection__contentShareIcon.productSection__contentShareIcon--twitter {
+            background-color: #47A9EA; }
+          .productSection .productSection__wrapper .productSection__contentHeader .productSection__contentShare .productSection__contentShareIcons .productSection__contentShareIcon.productSection__contentShareIcon--pinterest {
+            background-color: #C43736; }
+  .productSection .productSection__wrapper .productSection__content {
+    max-width: 45%; }
+    @media screen and (max-width: 1000px) {
+      .productSection .productSection__wrapper .productSection__content {
+        max-width: 100%; } }
+    .productSection .productSection__wrapper .productSection__content .productSection__contentWrapper.hide {
+      z-index: 10;
+      position: relative; }
+    @media screen and (min-width: 1000px) {
+      .productSection .productSection__wrapper .productSection__content .productSection__contentWrapper {
+        position: sticky;
+        top: 135px;
+        transition: .3s ease; } }
+    .productSection .productSection__wrapper .productSection__content .productSection__vendor {
+      font-family: "Manrope-SemiBold";
+      margin: 0.5625rem 0;
+      text-transform: uppercase; }
+    .productSection .productSection__wrapper .productSection__content .productSection__info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      justify-content: flex-start;
+      margin: 1.25rem 0; }
+      @media screen and (max-width: 768px) {
+        .productSection .productSection__wrapper .productSection__content .productSection__info {
+          gap: 0.625rem; } }
+      @media screen and (max-width: 768px) {
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__money {
+          font-size: 1.5625rem; } }
+      .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants {
+        font-family: "Manrope-SemiBold";
+        position: relative; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .productSection__variant {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          position: relative; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .productSection__variantLabel {
+          font-family: "Manrope-SemiBold";
+          font-size: 1.125rem;
+          margin-right: 0.3125rem;
+          order: 1;
+          text-transform: uppercase; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .customSelect {
+          padding: 1.875rem 0.9375rem;
+          min-width: 10.8125rem; }
+          .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .customSelect .customSelect--selected {
+            align-items: center;
+            display: flex;
+            font-family: "Manrope-SemiBold";
+            font-size: 1.125rem;
+            justify-content: center;
+            margin-right: 0.625rem;
+            order: 2; }
+            .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .customSelect .customSelect--selected::after {
+              content: '';
+              display: block;
+              height: 100px;
+              left: 0;
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 100%; }
+            .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .customSelect .customSelect--selected .productSection__variantPart {
+              font-family: "Manrope-SemiBold";
+              font-size: 1.125rem;
+              margin-right: 0.625rem;
+              text-transform: uppercase;
+              white-space: nowrap; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .customSelect__items div {
+          font-family: "Manrope-SemiBold";
+          font-size: 1.125rem;
+          text-transform: uppercase;
+          white-space: nowrap; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__variants .icon-arrow {
+          fill: #000;
+          transform: rotate(-90deg);
+          order: 3; }
+      .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity {
+        align-items: center;
+        border-radius: 10px;
+        border: 1px solid #e8e8e8;
+        display: flex;
+        justify-content: center;
+        min-width: 10.8125rem;
+        padding: 1.875rem 0.9375rem;
+        position: relative; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity .productSection__quantityLabel {
+          font-family: "Manrope-SemiBold";
+          font-size: 1.125rem; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity .productSection__quantityButton {
+          background-color: transparent;
+          border: none;
+          font-family: "Manrope-SemiBold";
+          font-size: 1.125rem;
+          margin: 0 0.9375rem;
+          min-width: 10px;
+          padding: 0; }
+          .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity .productSection__quantityButton.button--plus {
+            transform: rotate(180deg); }
+          .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity .productSection__quantityButton .icon-arrow {
+            fill: #fbad1b; }
+        .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity .productSection__quantityInput {
+          min-width: 2.1875rem;
+          padding: 0;
+          pointer-events: none;
+          text-align: center;
+          width: 1.25rem; }
+          .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity .productSection__quantityInput::-webkit-outer-spin-button, .productSection .productSection__wrapper .productSection__content .productSection__info .productSection__quantity .productSection__quantityInput::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0; }
+    .productSection .productSection__wrapper .productSection__content .productSection__description {
+      margin: 1.8125rem 0 0.9375rem; }
+      .productSection .productSection__wrapper .productSection__content .productSection__description .productSection__descTitle {
+        margin-bottom: 1.25rem;
+        text-transform: uppercase; }
+      .productSection .productSection__wrapper .productSection__content .productSection__description p,
+      .productSection .productSection__wrapper .productSection__content .productSection__description li,
+      .productSection .productSection__wrapper .productSection__content .productSection__description a,
+      .productSection .productSection__wrapper .productSection__content .productSection__description span {
+        font-family: "Manrope-SemiBold"; }
+      @media screen and (max-width: 768px) {
+        .productSection .productSection__wrapper .productSection__content .productSection__description {
+          margin: 1.25rem 0 1.5625rem; } }
+    @media screen and (max-width: 1000px) {
+      .productSection .productSection__wrapper .productSection__content .productSection__footer {
+        align-items: center;
+        display: flex;
+        gap: 0.625rem;
+        margin-top: 2.5rem; } }
+    @media screen and (max-width: 768px) {
+      .productSection .productSection__wrapper .productSection__content .productSection__footer {
+        justify-content: center;
+        margin-top: 1.25rem; } }
+    .productSection .productSection__wrapper .productSection__content .productSection__sizeChartButton {
+      background-color: #e8e8e8;
+      margin-top: 1.25rem;
+      padding: 0.875rem 1.25rem; }
+      @media screen and (max-width: 1000px) {
+        .productSection .productSection__wrapper .productSection__content .productSection__sizeChartButton {
+          margin: 0; } }
+      @media screen and (max-width: 768px) {
+        .productSection .productSection__wrapper .productSection__content .productSection__sizeChartButton {
+          padding: 0.5rem 0.8125rem; } }
+      .productSection .productSection__wrapper .productSection__content .productSection__sizeChartButton .icon-shirt {
+        width: 1.75rem;
+        height: 1.5625rem; }
+      .productSection .productSection__wrapper .productSection__content .productSection__sizeChartButton .productSection__sizeChartText {
+        font-family: "Manrope-SemiBold";
+        font-size: 0.75rem;
+        margin-left: 0.75rem; }
+        @media screen and (max-width: 768px) {
+          .productSection .productSection__wrapper .productSection__content .productSection__sizeChartButton .productSection__sizeChartText {
+            margin-left: 0.5rem; } }
+    .productSection .productSection__wrapper .productSection__content .productItem__formButton {
+      min-width: 23rem;
+      margin-top: 2.5rem; }
+      @media screen and (max-width: 1000px) {
+        .productSection .productSection__wrapper .productSection__content .productItem__formButton {
+          margin-top: 0; } }
+      @media screen and (max-width: 768px) {
+        .productSection .productSection__wrapper .productSection__content .productItem__formButton {
+          min-width: 10.75rem; } }
+
+.productSection .productSection__bottomIcon {
+  margin: 3.75rem 0;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  z-index: -1; }
+  @media screen and (max-width: 768px) {
+    .productSection .productSection__bottomIcon {
+      left: -2%;
+      margin: 0.9375rem 0; } }
+

@@ -1,0 +1,61 @@
+{
+  "product": {
+    "add_to_card": "Buy now",
+    "add_to_card_not_available": "Sold out",
+    "add_to_card_prod": "Add to cart",
+    "description_title": "About",
+    "back_button": "Back",
+    "quantity_label": "QTY",
+    "share_title": "Share",
+    "social": {
+      "facebook": "facebook",
+      "twitter": "twitter",
+      "pinterest": "pinterest"
+    },
+    "size_chart_title": "Size chart"
+  },
+  "collection": {
+    "view_all": "View all",
+    "title": "Product"
+  },
+  "cart": {
+    "cart_text": "Cart",
+    "cart_title": "Added to cart",
+    "cart_subtotal": "Sub-Total",
+    "cart_button": "View cart",
+    "cart_remove": "Remove",
+    "cart_qty": "Qty",
+    "cart_page_title": "Shopping cart",
+    "cart_item": "Item",
+    "cart_price": "Price",
+    "cart_quantity": "Quantity",
+    "cart_total": "Total",
+    "cart_count": "Number of Products",
+    "cart_total_price": "Total Value",
+    "checkout": "Checkout",
+    "continue_shopping": "Continue shopping",
+    "empty_cart": "Your cart is empty. Go ahead and",
+    "empty_cart_link": "explore Fan Store",
+    "cart_footer": "Special instructions for seller",
+    "note": "Please provide instructions"
+  },
+  "footer": {
+    "copyright": "ALL RIGHTS RESERVED.",
+    "newsletter": "Subscribe for updates",
+    "newsletter_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "newsletter_input": "Email",
+    "newsletter_button": "Subscribe",
+    "success": "You have been subscribed to our newsletter."
+  },
+  "map": {
+    "select_placeholder": "SELECT PRODUCT",
+    "zip_placeholder": "ENTER ZIP CODE...."
+  },
+  "404": {
+    "general": {
+      "title": "404",
+      "content": "The page you are looking for cannot be found. 🧐",
+      "button": "Back to homepage"
+    }
+  }
+}

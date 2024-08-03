@@ -1,0 +1,57 @@
+.textBanner {
+  margin: 5rem 0 3.125rem;
+  text-align: center; }
+  @media screen and (max-width: 768px) {
+    .textBanner {
+      margin: 1.25rem 0 1.5625rem; } }
+  .textBanner .textBanner__content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 4.0625rem;
+    max-width: 40.625rem;
+    position: relative;
+    text-align: left; }
+    @media screen and (max-width: 768px) {
+      .textBanner .textBanner__content {
+        margin-bottom: 1.875rem;
+        max-width: 100%; } }
+    @media screen and (max-width: 768px) {
+      .textBanner .textBanner__content .textBanner__icon {
+        max-width: 5.8125rem;
+        scale: 0.5; } }
+    .textBanner .textBanner__content .textBanner__text {
+      margin: 0 2.75rem;
+      letter-spacing: -0.025rem; }
+      @media screen and (max-width: 768px) {
+        .textBanner .textBanner__content .textBanner__text {
+          margin: 0 1.25rem;
+          min-width: 13.3125rem; } }
+      .textBanner .textBanner__content .textBanner__text p {
+        font-size: 2.1875rem;
+        line-height: 1.875rem;
+        margin: 0.625rem 0; }
+        .textBanner .textBanner__content .textBanner__text p strong {
+          color: #fbad1b;
+          font-weight: 400; }
+        @media screen and (max-width: 768px) {
+          .textBanner .textBanner__content .textBanner__text p {
+            font-size: 1.125rem;
+            line-height: 1rem;
+            margin: 0; } }
+    .textBanner .textBanner__content .textBanner__closeIcon {
+      position: absolute;
+      top: -16%;
+      right: -4.5%;
+      cursor: pointer; }
+      @media screen and (max-width: 768px) {
+        .textBanner .textBanner__content .textBanner__closeIcon {
+          top: -22%;
+          right: 5%; } }
+  .textBanner .textBanner__bottomIcon {
+    overflow: hidden; }
+    @media screen and (max-width: 768px) {
+      .textBanner .textBanner__bottomIcon {
+        left: -2%;
+        position: relative; } }
+

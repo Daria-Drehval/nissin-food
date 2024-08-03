@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="{{ shop.locale }}">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%}
+
+    {%- capture seo_title -%}
+      {{ page_title }}
+      {%- if current_tags -%}
+        {%- assign meta_tags = current_tags | join: ', ' -%}
+        &ndash;
+        {{ 'general.meta.tags' | t: tags: meta_tags -}}
+      {%- endif -%}
+      {%- if current_page != 1 -%}
+        &ndash;
+        {{ 'general.meta.page' | t: page: current_page }}
+      {%- endif -%}
+      {%- assign escaped_page_title = page_title | escape -%}
+      {%- unless escaped_page_title contains shop.name -%}
+        &ndash;
+        {{ shop.name }}
+      {%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title | strip }}</title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% include 'social-meta-tags' %}
+    {% render 'css-fonts' %}
+    {% include 'css-variables' %}
+    {% include 'css-files' %}
+    <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}" async>
+
+    <script src="{{ 'jquery-3.5.1.min.js' | asset_url }}" defer></script>
+    {{ content_for_header }}
+  </head>
+
+  <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+    {%- section 'annoncement-bar' -%}
+    {%- section 'header' -%}
+    {%- section 'cart-drawer' -%}
+    {{ content_for_layout }}
+
+    <script src="{{ 'lozad.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'slick-1.8.1.min.js' | asset_url }}" defer></script>
+    <link rel="stylesheet" href="{{- 'slick-theme.scss' | asset_url -}}">
+
+    <script src="{{ 'common.js' | asset_url }}" defer></script>
+    <script src="{{ 'formatMoney.js' | asset_url }}" defer></script>
+    <script src="{{ 'addToCart.js' | asset_url }}" defer></script>
+
+    {%- if template.name == 'product' -%}
+      <script src="{{ 'product.js' | asset_url }}" async></script>
+    {%- endif -%}
+
+    {%- if template.name == 'collection' -%}
+      <script src="{{ 'collection.js' | asset_url }}" async></script>
+    {%- endif -%}
+
+    {%- if template.name == 'cart' -%}
+      <script src="{{ 'cart.js' | asset_url }}" async></script>
+    {%- endif -%}
+
+    {%- if template.name == 'account' or template.name == 'addresses' or template contains 'orders' -%}
+      <script src="{{ 'account.js' | asset_url }}" async></script>
+    {%- endif -%}
+
+    {%- if template.name == 'page' -%}
+      <script src="{{ 'page.js' | asset_url }}" async></script>
+    {%- endif -%}
+
+    <script type="text/javascript">
+      var customer_id = "{{ customer.id }}";
+      var shopify_domain = "{{ shop.permanent_domain }}";
+
+      window.theme = {
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }}
+        },
+        moneyFormat: {{ shop.money_format | json }}
+      };
+    </script>
+
+    {%- unless template.name == "password" -%}
+      {% section 'footer' %}
+    {%- endunless -%}
+  </body>
+</html>
